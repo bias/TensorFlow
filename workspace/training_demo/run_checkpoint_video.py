@@ -26,6 +26,8 @@ warnings.filterwarnings('ignore')   # Suppress Matplotlib warnings
 # Create the parser
 my_parser = argparse.ArgumentParser(description='process oly lifting mp4 videos')
 my_parser.add_argument('--mp4', required=True, help='mp4 video')
+my_parser.add_argument('--model', required=True, help='model directory')
+my_parser.add_argument('--annotations', required=True, help='annotations directory')
 my_parser.add_argument('--out_dir', required=False, help='processing output dir')
 #my_parser.add_argument('--video', nargs='?', const=True, default='file_name', required=False, help='processing video')
 #my_parser.add_argument('--images', nargs='?', const=True, default='dir_name', required=False, help='generate processed image frames')
@@ -36,13 +38,22 @@ my_parser.add_argument('--frames', required=False, help='number of frames to pro
 args = my_parser.parse_args()
 
 
-#PATH_TO_MODEL_DIR = "exported-models/ssd_mobilenet_barbell"
-PATH_TO_MODEL_DIR = "exported-models/barbell_3"
-#PATH_TO_MODEL_DIR = "exported-models/efficientdet_d0"
+if not os.path.exists(args.model):
+    print("%s doesn't exist" % args.model)
+    sys.exit(1)
+
+if not os.path.exists(args.annotations):
+    print("%s doesn't exist" % args.annotations)
+    sys.exit(1)
+
+# XXX this assumes model file and annotation layout
+
+PATH_TO_MODEL_DIR = args.model
 PATH_TO_CFG = PATH_TO_MODEL_DIR + "/pipeline.config"
 PATH_TO_CKPT = PATH_TO_MODEL_DIR + "/checkpoint"
-PATH_TO_LABELS = "annotations/label_map.pbtxt"
 
+PATH_TO_ANNOTATION = args.annotations
+PATH_TO_LABELS = PATH_TO_ANNOTATION + "/label_map.pbtxt"
 
 print('Loading model... ', end='')
 start_time = time.time()
@@ -66,6 +77,7 @@ def detect_fn(image):
 
     return detections
 
+global category_index
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
 end_time = time.time()
@@ -88,8 +100,8 @@ suffexless_file_name = ""
 
 def main():
 
+
     global suffexless_file_name
-    args.mp4
     if not os.path.exists(args.mp4):
         print("%s doesn't exist" % args.mp4)
         sys.exit(1)
@@ -126,6 +138,7 @@ def main():
     with open(csv_file_name, 'w', newline='') as csvfile:
         trajectory_writer = csv.writer(csvfile, delimiter=',', quotechar='\'', quoting=csv.QUOTE_MINIMAL)
         detect_video(args.mp4, mp4_out_file_name, trajectory_writer)
+
 
 
 

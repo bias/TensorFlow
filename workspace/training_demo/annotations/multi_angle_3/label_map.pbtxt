@@ -1,0 +1,16 @@
+item {
+	id: 1
+	name: 'close_plate'
+}
+item {
+	id: 2
+	name: 'far_plate'
+}
+item {
+	id: 3
+	name: 'bar_end'
+}
+item {
+	id: 4
+	name: 'bar_end_sleeve'
+}

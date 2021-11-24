@@ -1,0 +1,277 @@
+WARNING:tensorflow:There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+W1124 08:54:44.014857 140461173031168 cross_device_ops.py:1387] There are non-GPU devices in `tf.distribute.Strategy`, not using nccl allreduce.
+INFO:tensorflow:Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+I1124 08:54:44.020555 140461173031168 mirrored_strategy.py:369] Using MirroredStrategy with devices ('/job:localhost/replica:0/task:0/device:CPU:0',)
+INFO:tensorflow:Maybe overwriting train_steps: None
+I1124 08:54:44.026883 140461173031168 config_util.py:552] Maybe overwriting train_steps: None
+INFO:tensorflow:Maybe overwriting use_bfloat16: False
+I1124 08:54:44.027008 140461173031168 config_util.py:552] Maybe overwriting use_bfloat16: False
+I1124 08:54:44.038645 140461173031168 ssd_efficientnet_bifpn_feature_extractor.py:142] EfficientDet EfficientNet backbone version: efficientnet-b0
+I1124 08:54:44.038761 140461173031168 ssd_efficientnet_bifpn_feature_extractor.py:144] EfficientDet BiFPN num filters: 64
+I1124 08:54:44.038853 140461173031168 ssd_efficientnet_bifpn_feature_extractor.py:145] EfficientDet BiFPN num iterations: 3
+I1124 08:54:44.043839 140461173031168 efficientnet_model.py:147] round_filter input=32 output=32
+I1124 08:54:44.086327 140461173031168 efficientnet_model.py:147] round_filter input=32 output=32
+I1124 08:54:44.086450 140461173031168 efficientnet_model.py:147] round_filter input=16 output=16
+I1124 08:54:44.199487 140461173031168 efficientnet_model.py:147] round_filter input=16 output=16
+I1124 08:54:44.199605 140461173031168 efficientnet_model.py:147] round_filter input=24 output=24
+I1124 08:54:44.497954 140461173031168 efficientnet_model.py:147] round_filter input=24 output=24
+I1124 08:54:44.498103 140461173031168 efficientnet_model.py:147] round_filter input=40 output=40
+I1124 08:54:44.797731 140461173031168 efficientnet_model.py:147] round_filter input=40 output=40
+I1124 08:54:44.797861 140461173031168 efficientnet_model.py:147] round_filter input=80 output=80
+I1124 08:54:45.244436 140461173031168 efficientnet_model.py:147] round_filter input=80 output=80
+I1124 08:54:45.244562 140461173031168 efficientnet_model.py:147] round_filter input=112 output=112
+I1124 08:54:45.695647 140461173031168 efficientnet_model.py:147] round_filter input=112 output=112
+I1124 08:54:45.695789 140461173031168 efficientnet_model.py:147] round_filter input=192 output=192
+I1124 08:54:46.310597 140461173031168 efficientnet_model.py:147] round_filter input=192 output=192
+I1124 08:54:46.310786 140461173031168 efficientnet_model.py:147] round_filter input=320 output=320
+I1124 08:54:46.459558 140461173031168 efficientnet_model.py:147] round_filter input=1280 output=1280
+I1124 08:54:46.526693 140461173031168 efficientnet_model.py:458] Building model efficientnet with params ModelConfig(width_coefficient=1.0, depth_coefficient=1.0, resolution=224, dropout_rate=0.2, blocks=(BlockConfig(input_filters=32, output_filters=16, kernel_size=3, num_repeat=1, expand_ratio=1, strides=(1, 1), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=16, output_filters=24, kernel_size=3, num_repeat=2, expand_ratio=6, strides=(2, 2), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=24, output_filters=40, kernel_size=5, num_repeat=2, expand_ratio=6, strides=(2, 2), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=40, output_filters=80, kernel_size=3, num_repeat=3, expand_ratio=6, strides=(2, 2), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=80, output_filters=112, kernel_size=5, num_repeat=3, expand_ratio=6, strides=(1, 1), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=112, output_filters=192, kernel_size=5, num_repeat=4, expand_ratio=6, strides=(2, 2), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise'), BlockConfig(input_filters=192, output_filters=320, kernel_size=3, num_repeat=1, expand_ratio=6, strides=(1, 1), se_ratio=0.25, id_skip=True, fused_conv=False, conv_type='depthwise')), stem_base_filters=32, top_base_filters=1280, activation='simple_swish', batch_norm='default', bn_momentum=0.99, bn_epsilon=0.001, weight_decay=5e-06, drop_connect_rate=0.2, depth_divisor=8, min_depth=None, use_se=True, input_channels=3, num_classes=1000, model_name='efficientnet', rescale_input=False, data_format='channels_last', dtype='float32')
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/object_detection/model_lib_v2.py:557: StrategyBase.experimental_distribute_datasets_from_function (from tensorflow.python.distribute.distribute_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+rename to distribute_datasets_from_function
+W1124 08:54:46.785539 140461173031168 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/object_detection/model_lib_v2.py:557: StrategyBase.experimental_distribute_datasets_from_function (from tensorflow.python.distribute.distribute_lib) is deprecated and will be removed in a future version.
+Instructions for updating:
+rename to distribute_datasets_from_function
+INFO:tensorflow:Reading unweighted datasets: ['annotations/side_1/train.record']
+I1124 08:54:46.791544 140461173031168 dataset_builder.py:163] Reading unweighted datasets: ['annotations/side_1/train.record']
+INFO:tensorflow:Reading record datasets for input file: ['annotations/side_1/train.record']
+I1124 08:54:46.791727 140461173031168 dataset_builder.py:80] Reading record datasets for input file: ['annotations/side_1/train.record']
+INFO:tensorflow:Number of filenames to read: 1
+I1124 08:54:46.791834 140461173031168 dataset_builder.py:81] Number of filenames to read: 1
+WARNING:tensorflow:num_readers has been reduced to 1 to match input file shards.
+W1124 08:54:46.791934 140461173031168 dataset_builder.py:87] num_readers has been reduced to 1 to match input file shards.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/object_detection/builders/dataset_builder.py:101: parallel_interleave (from tensorflow.python.data.experimental.ops.interleave_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.interleave(map_func, cycle_length, block_length, num_parallel_calls=tf.data.AUTOTUNE)` instead. If sloppy execution is desired, use `tf.data.Options.experimental_deterministic`.
+W1124 08:54:46.794460 140461173031168 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/object_detection/builders/dataset_builder.py:101: parallel_interleave (from tensorflow.python.data.experimental.ops.interleave_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.interleave(map_func, cycle_length, block_length, num_parallel_calls=tf.data.AUTOTUNE)` instead. If sloppy execution is desired, use `tf.data.Options.experimental_deterministic`.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/object_detection/builders/dataset_builder.py:236: DatasetV1.map_with_legacy_function (from tensorflow.python.data.ops.dataset_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.map()
+W1124 08:54:46.822875 140461173031168 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/object_detection/builders/dataset_builder.py:236: DatasetV1.map_with_legacy_function (from tensorflow.python.data.ops.dataset_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.data.Dataset.map()
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/dispatch.py:206: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Create a `tf.sparse.SparseTensor` and use `tf.sparse.to_dense` instead.
+W1124 08:54:58.271946 140461173031168 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/dispatch.py:206: sparse_to_dense (from tensorflow.python.ops.sparse_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Create a `tf.sparse.SparseTensor` and use `tf.sparse.to_dense` instead.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/autograph/impl/api.py:464: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+W1124 08:55:04.901703 140461173031168 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/autograph/impl/api.py:464: to_float (from tensorflow.python.ops.math_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use `tf.cast` instead.
+2021-11-24 08:55:08.642618: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:185] None of the MLIR Optimization Passes are enabled (registered 2)
+2021-11-24 08:55:09.046250: W tensorflow/core/framework/dataset.cc:679] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+/home/thor/.local/lib/python3.9/site-packages/keras/backend.py:401: UserWarning: `tf.keras.backend.set_learning_phase` is deprecated and will be removed after 2020-10-11. To update it, simply pass a True/False value to the `training` argument of the `__call__` method of your layer or model.
+  warnings.warn('`tf.keras.backend.set_learning_phase` is deprecated and '
+2021-11-24 08:55:55.081382: W tensorflow/core/framework/dataset.cc:679] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:617: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+W1124 08:55:56.272217 140423888631552 deprecation.py:542] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:617: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+WARNING:tensorflow:Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+W1124 08:56:08.204593 140423888631552 utils.py:75] Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+W1124 08:56:24.914380 140423888631552 utils.py:75] Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+W1124 08:56:39.643029 140423888631552 utils.py:75] Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+WARNING:tensorflow:Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+W1124 08:56:56.722548 140423888631552 utils.py:75] Gradients do not exist for variables ['top_bn/gamma:0', 'top_bn/beta:0'] when minimizing the loss.
+INFO:tensorflow:Step 100 per-step time 5.414s
+I1124 09:04:57.083594 140461173031168 model_lib_v2.py:698] Step 100 per-step time 5.414s
+INFO:tensorflow:{'Loss/classification_loss': 0.36288276,
+ 'Loss/localization_loss': 0.017355016,
+ 'Loss/regularization_loss': 0.028398134,
+ 'Loss/total_loss': 0.4086359,
+ 'learning_rate': 0.032599997}
+I1124 09:04:57.084345 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.36288276,
+ 'Loss/localization_loss': 0.017355016,
+ 'Loss/regularization_loss': 0.028398134,
+ 'Loss/total_loss': 0.4086359,
+ 'learning_rate': 0.032599997}
+INFO:tensorflow:Step 200 per-step time 4.330s
+I1124 09:12:10.117975 140461173031168 model_lib_v2.py:698] Step 200 per-step time 4.330s
+INFO:tensorflow:{'Loss/classification_loss': 0.3166907,
+ 'Loss/localization_loss': 0.012255227,
+ 'Loss/regularization_loss': 0.02855684,
+ 'Loss/total_loss': 0.3575028,
+ 'learning_rate': 0.0642}
+I1124 09:12:10.118709 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.3166907,
+ 'Loss/localization_loss': 0.012255227,
+ 'Loss/regularization_loss': 0.02855684,
+ 'Loss/total_loss': 0.3575028,
+ 'learning_rate': 0.0642}
+INFO:tensorflow:Step 300 per-step time 4.317s
+I1124 09:19:21.827230 140461173031168 model_lib_v2.py:698] Step 300 per-step time 4.317s
+INFO:tensorflow:{'Loss/classification_loss': 0.22130643,
+ 'Loss/localization_loss': 0.010256344,
+ 'Loss/regularization_loss': 0.028827943,
+ 'Loss/total_loss': 0.26039073,
+ 'learning_rate': 0.07993476}
+I1124 09:19:21.827660 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.22130643,
+ 'Loss/localization_loss': 0.010256344,
+ 'Loss/regularization_loss': 0.028827943,
+ 'Loss/total_loss': 0.26039073,
+ 'learning_rate': 0.07993476}
+INFO:tensorflow:Step 400 per-step time 4.276s
+I1124 09:26:29.450290 140461173031168 model_lib_v2.py:698] Step 400 per-step time 4.276s
+INFO:tensorflow:{'Loss/classification_loss': 0.17160165,
+ 'Loss/localization_loss': 0.0065723797,
+ 'Loss/regularization_loss': 0.028957007,
+ 'Loss/total_loss': 0.20713104,
+ 'learning_rate': 0.07941415}
+I1124 09:26:29.451014 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.17160165,
+ 'Loss/localization_loss': 0.0065723797,
+ 'Loss/regularization_loss': 0.028957007,
+ 'Loss/total_loss': 0.20713104,
+ 'learning_rate': 0.07941415}
+INFO:tensorflow:Step 500 per-step time 4.278s
+I1124 09:33:37.279572 140461173031168 model_lib_v2.py:698] Step 500 per-step time 4.278s
+INFO:tensorflow:{'Loss/classification_loss': 0.17719015,
+ 'Loss/localization_loss': 0.0068527167,
+ 'Loss/regularization_loss': 0.02906864,
+ 'Loss/total_loss': 0.2131115,
+ 'learning_rate': 0.07837971}
+I1124 09:33:37.280004 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.17719015,
+ 'Loss/localization_loss': 0.0068527167,
+ 'Loss/regularization_loss': 0.02906864,
+ 'Loss/total_loss': 0.2131115,
+ 'learning_rate': 0.07837971}
+INFO:tensorflow:Step 600 per-step time 4.244s
+I1124 09:40:41.708308 140461173031168 model_lib_v2.py:698] Step 600 per-step time 4.244s
+INFO:tensorflow:{'Loss/classification_loss': 0.13147263,
+ 'Loss/localization_loss': 0.006750488,
+ 'Loss/regularization_loss': 0.029108709,
+ 'Loss/total_loss': 0.16733183,
+ 'learning_rate': 0.076844946}
+I1124 09:40:41.708742 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.13147263,
+ 'Loss/localization_loss': 0.006750488,
+ 'Loss/regularization_loss': 0.029108709,
+ 'Loss/total_loss': 0.16733183,
+ 'learning_rate': 0.076844946}
+INFO:tensorflow:Step 700 per-step time 4.233s
+I1124 09:47:44.976884 140461173031168 model_lib_v2.py:698] Step 700 per-step time 4.233s
+INFO:tensorflow:{'Loss/classification_loss': 0.12085891,
+ 'Loss/localization_loss': 0.008689882,
+ 'Loss/regularization_loss': 0.029126408,
+ 'Loss/total_loss': 0.1586752,
+ 'learning_rate': 0.07482985}
+I1124 09:47:44.977341 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.12085891,
+ 'Loss/localization_loss': 0.008689882,
+ 'Loss/regularization_loss': 0.029126408,
+ 'Loss/total_loss': 0.1586752,
+ 'learning_rate': 0.07482985}
+INFO:tensorflow:Step 800 per-step time 4.233s
+I1124 09:54:48.268317 140461173031168 model_lib_v2.py:698] Step 800 per-step time 4.233s
+INFO:tensorflow:{'Loss/classification_loss': 0.109262824,
+ 'Loss/localization_loss': 0.004068636,
+ 'Loss/regularization_loss': 0.029168779,
+ 'Loss/total_loss': 0.14250025,
+ 'learning_rate': 0.07236068}
+I1124 09:54:48.268792 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.109262824,
+ 'Loss/localization_loss': 0.004068636,
+ 'Loss/regularization_loss': 0.029168779,
+ 'Loss/total_loss': 0.14250025,
+ 'learning_rate': 0.07236068}
+INFO:tensorflow:Step 900 per-step time 4.228s
+I1124 10:01:51.062441 140461173031168 model_lib_v2.py:698] Step 900 per-step time 4.228s
+INFO:tensorflow:{'Loss/classification_loss': 0.109936245,
+ 'Loss/localization_loss': 0.004807401,
+ 'Loss/regularization_loss': 0.02917151,
+ 'Loss/total_loss': 0.14391515,
+ 'learning_rate': 0.06946964}
+I1124 10:01:51.063169 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.109936245,
+ 'Loss/localization_loss': 0.004807401,
+ 'Loss/regularization_loss': 0.02917151,
+ 'Loss/total_loss': 0.14391515,
+ 'learning_rate': 0.06946964}
+INFO:tensorflow:Step 1000 per-step time 4.270s
+I1124 10:08:58.015475 140461173031168 model_lib_v2.py:698] Step 1000 per-step time 4.270s
+INFO:tensorflow:{'Loss/classification_loss': 0.118220635,
+ 'Loss/localization_loss': 0.00485909,
+ 'Loss/regularization_loss': 0.029176047,
+ 'Loss/total_loss': 0.15225577,
+ 'learning_rate': 0.06619443}
+I1124 10:08:58.015919 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.118220635,
+ 'Loss/localization_loss': 0.00485909,
+ 'Loss/regularization_loss': 0.029176047,
+ 'Loss/total_loss': 0.15225577,
+ 'learning_rate': 0.06619443}
+INFO:tensorflow:Step 1100 per-step time 4.230s
+I1124 10:16:00.977542 140461173031168 model_lib_v2.py:698] Step 1100 per-step time 4.230s
+INFO:tensorflow:{'Loss/classification_loss': 0.08915156,
+ 'Loss/localization_loss': 0.0036393183,
+ 'Loss/regularization_loss': 0.02916616,
+ 'Loss/total_loss': 0.12195704,
+ 'learning_rate': 0.062577724}
+I1124 10:16:00.977959 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.08915156,
+ 'Loss/localization_loss': 0.0036393183,
+ 'Loss/regularization_loss': 0.02916616,
+ 'Loss/total_loss': 0.12195704,
+ 'learning_rate': 0.062577724}
+INFO:tensorflow:Step 1200 per-step time 4.227s
+I1124 10:23:03.631252 140461173031168 model_lib_v2.py:698] Step 1200 per-step time 4.227s
+INFO:tensorflow:{'Loss/classification_loss': 0.11465367,
+ 'Loss/localization_loss': 0.008051183,
+ 'Loss/regularization_loss': 0.029153679,
+ 'Loss/total_loss': 0.15185854,
+ 'learning_rate': 0.058666687}
+I1124 10:23:03.631672 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.11465367,
+ 'Loss/localization_loss': 0.008051183,
+ 'Loss/regularization_loss': 0.029153679,
+ 'Loss/total_loss': 0.15185854,
+ 'learning_rate': 0.058666687}
+INFO:tensorflow:Step 1300 per-step time 4.227s
+I1124 10:30:06.345399 140461173031168 model_lib_v2.py:698] Step 1300 per-step time 4.227s
+INFO:tensorflow:{'Loss/classification_loss': 0.08670181,
+ 'Loss/localization_loss': 0.0036297399,
+ 'Loss/regularization_loss': 0.029135441,
+ 'Loss/total_loss': 0.11946699,
+ 'learning_rate': 0.054512303}
+I1124 10:30:06.345818 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.08670181,
+ 'Loss/localization_loss': 0.0036297399,
+ 'Loss/regularization_loss': 0.029135441,
+ 'Loss/total_loss': 0.11946699,
+ 'learning_rate': 0.054512303}
+INFO:tensorflow:Step 1400 per-step time 4.267s
+I1124 10:37:13.069240 140461173031168 model_lib_v2.py:698] Step 1400 per-step time 4.267s
+INFO:tensorflow:{'Loss/classification_loss': 0.08404271,
+ 'Loss/localization_loss': 0.0031976441,
+ 'Loss/regularization_loss': 0.029115517,
+ 'Loss/total_loss': 0.11635587,
+ 'learning_rate': 0.050168734}
+I1124 10:37:13.069670 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.08404271,
+ 'Loss/localization_loss': 0.0031976441,
+ 'Loss/regularization_loss': 0.029115517,
+ 'Loss/total_loss': 0.11635587,
+ 'learning_rate': 0.050168734}
+INFO:tensorflow:Step 1500 per-step time 4.233s
+I1124 10:44:16.394334 140461173031168 model_lib_v2.py:698] Step 1500 per-step time 4.233s
+INFO:tensorflow:{'Loss/classification_loss': 0.08543046,
+ 'Loss/localization_loss': 0.003044354,
+ 'Loss/regularization_loss': 0.029094078,
+ 'Loss/total_loss': 0.11756889,
+ 'learning_rate': 0.04569259}
+I1124 10:44:16.394765 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.08543046,
+ 'Loss/localization_loss': 0.003044354,
+ 'Loss/regularization_loss': 0.029094078,
+ 'Loss/total_loss': 0.11756889,
+ 'learning_rate': 0.04569259}
+INFO:tensorflow:Step 1600 per-step time 4.896s
+I1124 10:52:26.132026 140461173031168 model_lib_v2.py:698] Step 1600 per-step time 4.896s
+INFO:tensorflow:{'Loss/classification_loss': 0.08046319,
+ 'Loss/localization_loss': 0.0023654823,
+ 'Loss/regularization_loss': 0.029070005,
+ 'Loss/total_loss': 0.111898676,
+ 'learning_rate': 0.04114224}
+I1124 10:52:26.135469 140461173031168 model_lib_v2.py:701] {'Loss/classification_loss': 0.08046319,
+ 'Loss/localization_loss': 0.0023654823,
+ 'Loss/regularization_loss': 0.029070005,
+ 'Loss/total_loss': 0.111898676,
+ 'learning_rate': 0.04114224}

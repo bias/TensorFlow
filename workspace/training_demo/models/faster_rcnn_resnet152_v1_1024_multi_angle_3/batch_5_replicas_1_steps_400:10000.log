@@ -56,3 +56,42 @@ Use ref() instead.
 W1124 11:45:39.655356 140434131109632 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/autograph/impl/api.py:464: Tensor.experimental_ref (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
 Instructions for updating:
 Use ref() instead.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/dispatch.py:206: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+
+W1124 11:45:48.288789 140434131109632 deprecation.py:339] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/dispatch.py:206: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+
+2021-11-24 11:46:31.376941: W tensorflow/core/framework/dataset.cc:679] Input of GeneratorDatasetOp::Dataset will not be optimized because the dataset does not implement the AsGraphDefInternal() method needed to apply optimizations.
+WARNING:tensorflow:From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:617: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+W1124 11:46:33.037607 140435741722368 deprecation.py:542] From /home/thor/.local/lib/python3.9/site-packages/tensorflow/python/util/deprecation.py:617: calling map_fn_v2 (from tensorflow.python.ops.map_fn) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Use fn_output_signature instead
+INFO:tensorflow:Step 100 per-step time 43.363s
+I1124 12:58:48.722772 140472350675200 model_lib_v2.py:698] Step 100 per-step time 43.363s
+INFO:tensorflow:{'Loss/BoxClassifierLoss/classification_loss': 0.20707127,
+ 'Loss/BoxClassifierLoss/localization_loss': 0.18216531,
+ 'Loss/RPNLoss/localization_loss': 0.09981869,
+ 'Loss/RPNLoss/objectness_loss': 0.025925016,
+ 'Loss/regularization_loss': 0.0,
+ 'Loss/total_loss': 0.5149803,
+ 'learning_rate': 0.01999975}
+I1124 12:58:48.723651 140472350675200 model_lib_v2.py:701] {'Loss/BoxClassifierLoss/classification_loss': 0.20707127,
+ 'Loss/BoxClassifierLoss/localization_loss': 0.18216531,
+ 'Loss/RPNLoss/localization_loss': 0.09981869,
+ 'Loss/RPNLoss/objectness_loss': 0.025925016,
+ 'Loss/regularization_loss': 0.0,
+ 'Loss/total_loss': 0.5149803,
+ 'learning_rate': 0.01999975}

@@ -1,20 +1,12 @@
-import cv2
+#!/usr/bin/env python3
 
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
 import pathlib
+import argparse
+import sys
+
+import cv2
 import tensorflow as tf
-
-tf.get_logger().setLevel('ERROR')           # Suppress TensorFlow logging (2)
-
-def images():
-    filenames = ['images_18.jpg', 'images_19.jpg', 'images_20.jpg', 'images_21.jpg']
-    image_paths = []
-    for filename in filenames:
-        image_paths.append("images/test/"+filename)
-    return image_paths
-
-IMAGE_PATHS = images()
 
 import time
 from object_detection.utils import label_map_util
@@ -22,10 +14,53 @@ from object_detection.utils import config_util
 from object_detection.utils import visualization_utils as viz_utils
 from object_detection.builders import model_builder
 
-PATH_TO_MODEL_DIR = "exported-models/barbell_1"
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+import warnings
+
+warnings.filterwarnings('ignore')   # Suppress Matplotlib warnings
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
+tf.get_logger().setLevel('ERROR')           # Suppress TensorFlow logging (2)
+
+
+detection_thresh = 0.3
+max_boxes = 8
+
+my_parser = argparse.ArgumentParser(description='process oly lifting mp4 videos')
+my_parser.add_argument('--model', required=True, help='model directory')
+my_parser.add_argument('--annotations', required=True, help='annotations directory')
+my_parser.add_argument('--image_dir', required=True, help='generate processed image frames')
+my_parser.add_argument('--out_dir', required=True, help='processing output dir')
+args = my_parser.parse_args()
+
+
+if not os.path.exists(args.image_dir):
+    print("%s doesn't exist" % args.image_dir)
+    sys.exit(1)
+    
+images = os.listdir(args.image_dir)
+
+if not os.path.exists(args.out_dir):
+    print("%s doesn't exist" % args.out_dir)
+    sys.exit(1)
+
+
+if not os.path.exists(args.model):
+    print("%s doesn't exist" % args.model)
+    sys.exit(1)
+
+if not os.path.exists(args.annotations):
+    print("%s doesn't exist" % args.annotations)
+    sys.exit(1)
+
+# XXX this assumes model file and annotation layout
+PATH_TO_MODEL_DIR = args.model
 PATH_TO_CFG = PATH_TO_MODEL_DIR + "/pipeline.config"
 PATH_TO_CKPT = PATH_TO_MODEL_DIR + "/checkpoint"
-PATH_TO_LABELS = "annotations/label_map.pbtxt"
+PATH_TO_ANNOTATION = args.annotations
+PATH_TO_LABELS = PATH_TO_ANNOTATION + "/label_map.pbtxt"
+
 
 print('Loading model... ', end='')
 start_time = time.time()
@@ -52,14 +87,9 @@ def detect_fn(image):
 end_time = time.time()
 elapsed_time = end_time - start_time
 print('Done! Took {} seconds'.format(elapsed_time))
-
 category_index = label_map_util.create_category_index_from_labelmap(PATH_TO_LABELS, use_display_name=True)
 
-import numpy as np
-from PIL import Image
-import matplotlib.pyplot as plt
-import warnings
-warnings.filterwarnings('ignore')   # Suppress Matplotlib warnings
+
 
 def load_image_into_numpy_array(path):
     """Load an image from file into a numpy array.
@@ -76,54 +106,58 @@ def load_image_into_numpy_array(path):
     """
     return np.array(Image.open(path))
 
-test_num = 1
-for image_path in IMAGE_PATHS:
+def main():
 
-    print('Running inference for {}... '.format(image_path), end='')
+    for image in images:
 
-    image_np = load_image_into_numpy_array(image_path)
+        suffexless_file_name = image[:-4]
+        suffex = image[-4:]
+        if suffex != ".jpg":
+            continue
 
-    # Things to try:
-    # Flip horizontally
-    # image_np = np.fliplr(image_np).copy()
+        image_path = args.image_dir + "/" + image
+        image_out_path = "%s/%s_out.jpg" % (args.out_dir, suffexless_file_name)
 
-    # Convert image to grayscale
-    # image_np = np.tile(
-    #     np.mean(image_np, 2, keepdims=True), (1, 1, 3)).astype(np.uint8)
+        print("Converting %s to %s" % (image_path, image_out_path))
 
-    input_tensor = tf.convert_to_tensor(np.expand_dims(image_np, 0), dtype=tf.float32)
+        image_np = load_image_into_numpy_array(image_path)
 
-    detections = detect_fn(input_tensor)
+        input_tensor = tf.convert_to_tensor(np.expand_dims(image_np, 0), dtype=tf.float32)
 
-    # All outputs are batches tensors.
-    # Convert to numpy arrays, and take index [0] to remove the batch dimension.
-    # We're only interested in the first num_detections.
-    num_detections = int(detections.pop('num_detections'))
-    detections = {key: value[0, :num_detections].numpy()
-                  for key, value in detections.items()}
-    detections['num_detections'] = num_detections
+        detections = detect_fn(input_tensor)
 
-    # detection_classes should be ints.
-    detections['detection_classes'] = detections['detection_classes'].astype(np.int64)
+        # All outputs are batches tensors.
+        # Convert to numpy arrays, and take index [0] to remove the batch dimension.
+        # We're only interested in the first num_detections.
+        num_detections = int(detections.pop('num_detections'))
+        detections = {key: value[0, :num_detections].numpy()
+                      for key, value in detections.items()}
+        detections['num_detections'] = num_detections
 
-    label_id_offset = 1
-    image_np_with_detections = image_np.copy()
+        # detection_classes should be ints.
+        detections['detection_classes'] = detections['detection_classes'].astype(np.int64)
 
-    viz_utils.visualize_boxes_and_labels_on_image_array(
-            image_np_with_detections,
-            detections['detection_boxes'],
-            detections['detection_classes']+label_id_offset,
-            detections['detection_scores'],
-            category_index,
-            use_normalized_coordinates=True,
-            max_boxes_to_draw=200,
-            min_score_thresh=.30,
-            agnostic_mode=False)
+        label_id_offset = 1
+        image_np_with_detections = image_np.copy()
 
-    #plt.figure()
-    #plt.imshow(image_np_with_detections)
-    cv2.imwrite("test_out_%s.jpg" % test_num, image_np_with_detections)
-    test_num += 1
-    print('Done')
+        viz_utils.visualize_boxes_and_labels_on_image_array(
+                image_np_with_detections,
+                detections['detection_boxes'],
+                detections['detection_classes']+label_id_offset,
+                detections['detection_scores'],
+                category_index,
+                use_normalized_coordinates=True,
+                max_boxes_to_draw=max_boxes,
+                min_score_thresh=detection_thresh,
+                agnostic_mode=False)
 
-# sphinx_gallery_thumbnail_number = 2
+        cv2.imwrite(image_out_path, image_np_with_detections)
+
+
+
+#
+# main
+#
+if __name__ == "__main__":
+    main()
+

@@ -22,6 +22,16 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
 tf.get_logger().setLevel('ERROR')           # Suppress TensorFlow logging (2)
 warnings.filterwarnings('ignore')   # Suppress Matplotlib warnings
 
+detection_thresh = 0.1
+max_boxes = 8
+label_offset = 1
+
+frames_to_process = 0
+frame_count = 0
+frame_rate = 0
+frame_x = 0
+frame_y = 0
+
 
 # Create the parser
 my_parser = argparse.ArgumentParser(description='process oly lifting mp4 videos')
@@ -85,16 +95,6 @@ elapsed_time = end_time - start_time
 
 print('Done! Took {} seconds'.format(elapsed_time))
 
-
-detection_thresh = 0.1
-max_boxes = 8
-label_offset = 1
-
-frames_to_process = 0
-frame_count = 0
-frame_rate = 0
-frame_x = 0
-frame_y = 0
 
 suffexless_file_name = ""
 

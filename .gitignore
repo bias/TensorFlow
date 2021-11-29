@@ -1,4 +1,10 @@
 .DS_Store
+
+*.swp
+*.swo
+
+*turd*.*
+
 ckpt-*.index
 ckpt-*.data-00000-of-00001
 checkpoint

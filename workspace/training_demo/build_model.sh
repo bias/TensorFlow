@@ -2,10 +2,16 @@
 
 MODEL=$1
 CHECK=$2
-BATCH=$3
-REP=$4
-WARM=$5
-TOTAL=$6
+
+BATCH=$(grep batch_size ${MODEL}/pipeline.config | head -n 1 | sed 's/.*batch_size:\s*\(\d*\)/\1/')
+REP=$(grep replicas_to_aggregate ${MODEL}/pipeline.config | sed 's/.*replicas_to_aggregate:\s*\(\d*\)/\1/')
+WARM=$(grep warmup_steps ${MODEL}/pipeline.config | sed 's/.*warmup_steps:\s*\(\d*\)/\1/')
+TOTAL=$(grep total_steps ${MODEL}/pipeline.config | sed 's/.*total_steps:\s*\(\d*\)/\1/')
+
+echo batch \"$BATCH\"
+echo replicas \"$REP\"
+echo warmup \"$WARM\"
+echo total \"$TOTAL\"
 
 python3 model_main_tf2.py \
   --checkpoint_every_n $CHECK \

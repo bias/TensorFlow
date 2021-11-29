@@ -124,16 +124,11 @@ def main():
     if args.frames:
         frames_to_process = int(args.frames)
 
-    if args.ellipse:
+    if args.ellipse != None:
         print("ellipse %s" % args.ellipse)
-    else:
-        print("f ellipse %s" % args.ellipse)
 
-    if args.video:
+    if args.video != None:
         print("video %s" % args.video)
-    else:
-        print("f video %s" % args.video)
-        sys.exit(1)
 
     with open(csv_file_name, 'w', newline='') as csvfile:
         trajectory_writer = csv.writer(csvfile, delimiter=',', quotechar='\'', quoting=csv.QUOTE_MINIMAL)
@@ -161,7 +156,7 @@ def detect_video(path, output_path, trajectory_writer):
     print("frame :: count %s, rate %s, dim_x %s, dim_y %s" % (frame_count, frame_rate, frame_x, frame_y))
 
     # Set output video writer with codec
-    if args.video:
+    if args.video != None:
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         out = cv2.VideoWriter(output_path, fourcc, frame_rate, (frame_x, frame_y))
     
@@ -174,7 +169,7 @@ def detect_video(path, output_path, trajectory_writer):
 
         output_file = detect_image(image, current_frame, trajectory_writer)
 
-        if args.video:
+        if args.video != None:
             out.write(output_file)
 
         if args.images:
@@ -191,7 +186,7 @@ def detect_video(path, output_path, trajectory_writer):
                 frame_read = False
 
     # Release video file when we're ready
-    if args.video:
+    if args.video != None:
         out.release()
 
 
@@ -205,7 +200,7 @@ def detect_image(image, current_frame, trajectory_writer):
     plates = process_frame(detections, current_frame, trajectory_writer)
 
     # FIXME WIP
-    if args.ellipse and current_frame == 0:
+    if args.ellipse != None and current_frame == 0:
         cp = plates['first_close_plates']
         print(frame_y, frame_x)
         print(image.shape)
@@ -254,6 +249,8 @@ def detect_image(image, current_frame, trajectory_writer):
 #        cv2.imwrite("turd_close_sobelxy.jpg", sobelxy)
 #        cv2.imwrite("turd_close_sobelxy_ellipse.jpg", sobelxy_ellipse)
 
+        # FIXME check if cp and fp exist!!!
+
         # XXX invert y dim
         fp_y_min = max( int(frame_y-fp['y_max']) - buf, 0)
         fp_y_max = min( int(frame_y-fp['y_min']) + buf, frame_y)
@@ -283,7 +280,7 @@ def detect_image(image, current_frame, trajectory_writer):
 
 
     # Perform visualization on output image/frame 
-    if args.video or args.images:
+    if args.video != None or args.images:
         viz_utils.visualize_boxes_and_labels_on_image_array(
           image,
           detections['detection_boxes'][0].numpy(),
